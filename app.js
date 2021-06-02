@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-require("dotenv/config");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -31,7 +30,7 @@ app.use(`${api}/categories`, categoriesRoutes);
 app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/orders`, ordersRoutes);
 
-mongoose.connect( process.env.CONNECTION_STRING, {
+mongoose.connect( process.env.MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 })
