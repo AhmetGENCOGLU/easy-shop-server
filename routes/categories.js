@@ -2,12 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {Category} = require("../models/category");
 
-function checkUserAuth(req, res, next) {
-    if (req.session.user) return next();
-    return next(new NotAuthorizedError());
-}
-
-router.get(`/`, checkUserAuth , async (req, res)=>{
+router.get(`/`, async (req, res)=>{
     const categoryList = await Category.find();
     if(!categoryList){
         res.status(500).json({
