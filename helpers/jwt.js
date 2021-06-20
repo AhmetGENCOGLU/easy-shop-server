@@ -2,7 +2,6 @@ const expressJwt = require("express-jwt");
 
 function authJwt() {
     const secret = process.env.SECRET_WORDS_FOR_LOGIN;
-    const api = process.env.API_URL;
     return expressJwt({
         secret,
         algorithms:['HS256'],
@@ -10,10 +9,11 @@ function authJwt() {
     }).unless({
         path:[
             { url: /\/public\/uploads(.*)/ , methods:['GET', 'OPTIONS'] },
-            { url: /\/api\/v1\/products(.*)/ , methods:['GET', 'OPTIONS'] },
-            { url: /\/api\/v1\/categories(.*)/ , methods:['GET', 'OPTIONS'] },
-            `${api}/users/login`,
-            `${api}/users/register`
+            { url: /\/products(.*)/ , methods:['GET', 'OPTIONS'] },
+            { url: /\/categories(.*)/ , methods:['GET', 'OPTIONS'] },
+            { url: /\/orders(.*)/, methods: ['GET', 'OPTIONS', 'POST'] },
+            `/users/login`,
+            `/users/register`
         ]
     });
 }

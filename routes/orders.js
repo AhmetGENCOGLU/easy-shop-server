@@ -4,7 +4,7 @@ const {Order} = require("../models/order");
 const {OrderItem} = require("../models/orderItem");
 
 router.get(`/`, async (req, res)=>{
-    const orderList = await Order.find().populate('user','name').sort({'dateOrdered': -1}); //veritebanından çağırılan veride User'ı açık bir şekilde gelsin ancak sadece name değeri gelsin dedik.Sort -1 ile de gelen verileri tarihe göre yeniden eskiye sıraladık
+    const orderList = await Order.find().populate('user'); //veritebanından çağırılan veride User'ı açık bir şekilde gelsin.
     if(!orderList){
         res.status(500).json({
             success:false
@@ -15,7 +15,7 @@ router.get(`/`, async (req, res)=>{
 
 router.get(`/:id`, async (req, res)=>{
     const order = await Order.findById(req.params.id)
-    .populate('user','name')
+    .populate('user')
     .populate({
         path: 'orderItems', populate:{
             path:'product',populate:'category'
