@@ -54,7 +54,7 @@ connection.once("open", () => {
 });
 
 
-var server = app.listen(process.env.PORT, '192.168.0.10' ,()=>{ //ReactNative ile Backend arasında network error olduğu için ip adresini belirttik. Ve frontenddeki axios dosyasına baseURL i de ip şeklinde yazdık
+var server = app.listen(process.env.PORT, '192.168.0.13' ,()=>{ //ReactNative ile Backend arasında network error olduğu için ip adresini belirttik. Ve frontenddeki axios dosyasına baseURL i de ip şeklinde yazdık
     var port = server.address().port;
     console.log(`Express is working on port: ${port}`);
 });
